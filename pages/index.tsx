@@ -84,7 +84,16 @@ export default function Home() {
             </Alert>
           </Box>
         )}
-        {fetchingImages && <LinearProgress />}
+        {fetchingImages && (
+          <Box
+            position="fixed"
+            top={0}
+            left={0}
+            sx={{ width: "100%", marginBottom: "2rem" }}
+          >
+            <LinearProgress />
+          </Box>
+        )}
         {imagesInitialised && catImages && catImages.length === 0 && (
           <Alert severity="warning">
             :( You've not uploaded any kitties yet. Click the plus button to
