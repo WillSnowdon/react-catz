@@ -1,0 +1,12 @@
+.catImageList {
+  display: grid;
+  width: 100%;
+}
+
+.favIcon {
+  color: #ff5858;
+}
+
+.favIconOutlined {
+  color: #da5b5b;
+}

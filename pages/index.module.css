@@ -1,19 +1,15 @@
 .container {
   min-height: 100vh;
-  padding: 0 0.5rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
-  height: 100vh;
 }
 
 .main {
-  padding: 5rem 0;
-  flex: 1;
+  padding: 0 2rem;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  /* justify-content: center; */
   align-items: center;
 }
 
@@ -24,6 +20,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.uploadBtn {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
 }
 
 .footer a {
