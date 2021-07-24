@@ -1,0 +1,14 @@
+.cardMedia {
+  width: 100%;
+  padding-top: 100%;
+  background-size: contain;
+  background-color: black;
+}
+
+.favIcon {
+  color: #ff5858;
+}
+
+.favIconOutlined {
+  color: #da5b5b;
+}

@@ -72,13 +72,13 @@ export default function Home() {
       <Head title="Catz" description="Your weird collection of cat pics" />
 
       <main className={styles.main}>
-        <Box marginBottom="3rem">
-          <Typography variant="h1">Your Kitty Catz</Typography>
-        </Box>
+        <Typography gutterBottom variant="h1">
+          Your Kitty Catz
+        </Typography>
 
         {/* TODO: Add favourite/vote refresh handling */}
         {imageRequestError && (
-          <Box marginBottom="2rem">
+          <Box marginBottom={2}>
             <Alert severity="error">
               Oops, there has been an issue loading your catz.
             </Alert>
@@ -99,7 +99,7 @@ export default function Home() {
               onDownVote={(image) => onAddVote(image, VoteValue.Down)}
               images={catImages}
             />
-            <Box marginTop="2rem">
+            <Box marginTop={3}>
               <Pagination
                 count={Math.ceil(
                   paginationData.paginationCount /

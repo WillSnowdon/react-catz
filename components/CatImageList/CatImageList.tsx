@@ -16,6 +16,7 @@ import {
   ThumbDown,
 } from "@material-ui/icons";
 import styles from "./CatImageList.module.css";
+import { CatImageCard } from "./CatImageCard";
 
 export type CatImage = {
   score: number;
@@ -40,56 +41,15 @@ export const CatImageList: FC<CatImageListProps> = ({
     <div className={styles.catImageList}>
       <Grid container spacing={2}>
         {images.map((catImg) => {
-          const { image, score, favourite } = catImg;
+          const { image } = catImg;
           return (
             <Grid key={image.id} item lg={3} md={6} sm={6} xs={12}>
-              <Card>
-                <CardMedia
-                  style={{
-                    width: "100%",
-                    paddingTop: "100%",
-                    backgroundSize: "contain",
-                    backgroundColor: "black",
-                  }}
-                  image={image.url}
-                  title={`Cat ${catImg.image.id}`}
-                />
-                <CardContent>
-                  <Typography
-                    variant="body2"
-                    color="textSecondary"
-                    component="p"
-                  >
-                    Score: {score}
-                  </Typography>
-                </CardContent>
-                <CardActions disableSpacing>
-                  <IconButton
-                    aria-label="add to favorites"
-                    onClick={() => onFavourite(catImg)}
-                  >
-                    {favourite ? (
-                      <Favorite className={styles.favIcon} />
-                    ) : (
-                      <FavoriteBorderOutlined
-                        className={styles.favIconOutlined}
-                      />
-                    )}
-                  </IconButton>
-                  <IconButton
-                    aria-label="down vote"
-                    onClick={() => onDownVote(image)}
-                  >
-                    <ThumbDown />
-                  </IconButton>
-                  <IconButton
-                    aria-label="up vote"
-                    onClick={() => onUpVote(image)}
-                  >
-                    <ThumbUp />
-                  </IconButton>
-                </CardActions>
-              </Card>
+              <CatImageCard
+                {...catImg}
+                onDownVote={() => onDownVote(image)}
+                onUpVote={() => onUpVote(image)}
+                onFavourite={() => onFavourite(catImg)}
+              />
             </Grid>
           );
         })}

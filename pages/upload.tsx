@@ -4,7 +4,7 @@ import styles from "./upload.module.css";
 import { useCallback, useState } from "react";
 import { useDropzone } from "react-dropzone";
 import { uploadImage } from "../api/cats";
-import { Typography, Box, Snackbar } from "@material-ui/core";
+import { Typography, Snackbar, Paper } from "@material-ui/core";
 import { Alert } from "@material-ui/lab";
 
 export default function Upload() {
@@ -31,15 +31,17 @@ export default function Upload() {
       />
 
       <main className={styles.main}>
-        <Box marginBottom="3rem">
-          <Typography className={styles.title} variant="h1">
-            Beam Up Kitty
-          </Typography>
-        </Box>
-        <div {...getRootProps()} className={styles.uploadContainer}>
-          <input {...getInputProps()} />
-          <p>Drag 'n' drop some kitties here, or click to select some</p>
-        </div>
+        <Typography gutterBottom className={styles.title} variant="h1">
+          Beam Up Kitty
+        </Typography>
+
+        {/* TODO: make the styling respond to drag events based upon dropzone hook props */}
+        <Paper>
+          <div {...getRootProps()} className={styles.uploadContainer}>
+            <input {...getInputProps()} />
+            <p>Drag 'n' drop a kitty here, or click to select one</p>
+          </div>
+        </Paper>
 
         <Snackbar
           open={showErrorSnack}
