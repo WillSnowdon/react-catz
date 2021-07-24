@@ -60,6 +60,11 @@ export async function catAPIFetch<T>(params: FetchParams): Promise<T> {
   return response.json();
 }
 
+export type PaginationParams = {
+  limit: number;
+  page: number;
+};
+
 export type PaginatedFetchData<T> = { data: T; pagination: PaginationData };
 export async function catAPIPaginatedFetch<T>(
   params: FetchParams

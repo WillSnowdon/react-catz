@@ -1,24 +1,29 @@
 import { useState, useEffect } from "react";
-import { CatImage } from "../components";
 import {
   Favourite,
   Image,
   Vote,
   getUploadedImages,
   VoteValue,
-  PaginationParams,
 } from "../api/cats";
+import { PaginationParams } from "../api/cats/utils/";
 import { getVotes } from "../api/cats/votes";
 import { groupBy, keyBy } from "lodash";
 import { getFavourites } from "../api/cats/favourites";
 import { useFetch } from "./useFetch";
-import { PaginationData, PaginatedFetchData } from "../api/cats/utils";
+import { PaginatedFetchData } from "../api/cats/utils";
+import { CatImage } from "../components";
 
 export function usePaginatedCatImages() {
-  const { fetch: fetchImages, data: images } = useFetch<
-    PaginationParams,
-    PaginatedFetchData<Image[]>
-  >({ fetch: getUploadedImages });
+  const {
+    fetch: fetchImages,
+    data: images,
+    isRequestError: imageRequestError,
+    isDataInitialised: imagesInitialised,
+    isFetching: fetchingImages,
+  } = useFetch<PaginationParams, PaginatedFetchData<Image[]>>({
+    fetch: getUploadedImages,
+  });
   const { fetch: fetchVotes, data: votes } = useFetch({ fetch: getVotes });
   const { fetch: fetchFavourites, data: favourites } = useFetch({
     fetch: getFavourites,
@@ -44,7 +49,7 @@ export function usePaginatedCatImages() {
   return {
     catImages:
       images && images.data
-        ? images.data.map((image) => {
+        ? images.data.map<CatImage>((image) => {
             return {
               image,
               score:
@@ -57,6 +62,9 @@ export function usePaginatedCatImages() {
     paginationData: images?.pagination,
     favouriteMap,
     voteMap,
+    imageRequestError,
+    imagesInitialised,
+    fetchingImages,
     fetchImages,
     fetchFavourites,
     fetchVotes,

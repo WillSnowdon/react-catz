@@ -1,10 +1,5 @@
-import { catAPIFetch, catAPIPaginatedFetch } from "./utils";
+import { catAPIFetch, catAPIPaginatedFetch, PaginationParams } from "./utils";
 import { Image } from "./models";
-
-export type PaginationParams = {
-  limit: number;
-  page: number;
-};
 
 /**
  * Get paginated list of users uploaded cat images

@@ -1,12 +1,14 @@
 import { Head } from "../components";
 import { useRouter } from "next/router";
 import styles from "./upload.module.css";
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 import { useDropzone } from "react-dropzone";
 import { uploadImage } from "../api/cats";
-import { Typography, Box } from "@material-ui/core";
+import { Typography, Box, Snackbar } from "@material-ui/core";
+import { Alert } from "@material-ui/lab";
 
 export default function Upload() {
+  const [showErrorSnack, setShowErrorSnack] = useState(false);
   const router = useRouter();
   const onDrop = useCallback(async (acceptedFiles: File[]) => {
     if (acceptedFiles.length) {
@@ -14,17 +16,18 @@ export default function Upload() {
         await uploadImage(acceptedFiles[0]);
         router.push("/");
       } catch (e) {
-        console.error(e);
+        setShowErrorSnack(true);
       }
     }
   }, []);
   const { getRootProps, getInputProps } = useDropzone({ onDrop, maxFiles: 1 });
+  const closeSnack = () => setShowErrorSnack(false);
 
   return (
     <div className={styles.container}>
       <Head
         title="Upload Kitty Cat"
-        description="Upload a Kitty Cat from your large weird collection of cat pics."
+        description="Upload a Kitty cat from your large weird collection of cat pics."
       />
 
       <main className={styles.main}>
@@ -35,8 +38,18 @@ export default function Upload() {
         </Box>
         <div {...getRootProps()} className={styles.uploadContainer}>
           <input {...getInputProps()} />
-          <p>Drag 'n' drop some files here, or click to select files</p>
+          <p>Drag 'n' drop some kitties here, or click to select some</p>
         </div>
+
+        <Snackbar
+          open={showErrorSnack}
+          autoHideDuration={6000}
+          onClose={closeSnack}
+        >
+          <Alert onClose={closeSnack} severity="error">
+            Oops, error updating cat pic. Please try another.
+          </Alert>
+        </Snackbar>
       </main>
     </div>
   );
