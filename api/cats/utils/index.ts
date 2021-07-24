@@ -60,9 +60,10 @@ export async function catAPIFetch<T>(params: FetchParams): Promise<T> {
   return response.json();
 }
 
+export type PaginatedFetchData<T> = { data: T; pagination: PaginationData };
 export async function catAPIPaginatedFetch<T>(
   params: FetchParams
-): Promise<{ data: T; pagination: PaginationData }> {
+): Promise<PaginatedFetchData<T>> {
   const response = await fetchData<T>(params);
   const data = (await response.json()) as T;
 

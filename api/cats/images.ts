@@ -1,7 +1,7 @@
 import { catAPIFetch, catAPIPaginatedFetch } from "./utils";
 import { Image } from "./models";
 
-type GetUploadedImagesQuery = {
+export type PaginationParams = {
   limit: number;
   page: number;
 };
@@ -10,7 +10,7 @@ type GetUploadedImagesQuery = {
  * Get paginated list of users uploaded cat images
  * @param queryParams
  */
-export const getUploadedImages = (queryParams: GetUploadedImagesQuery) =>
+export const getUploadedImages = (queryParams: PaginationParams) =>
   catAPIPaginatedFetch<Image[]>({ path: "/images/", queryParams });
 
 /**
