@@ -1,4 +1,4 @@
-import { catAPIFetch } from "./utils";
+import { catAPIFetch, catAPIPaginatedFetch } from "./utils";
 import { Image } from "./models";
 
 type GetUploadedImagesQuery = {
@@ -6,9 +6,17 @@ type GetUploadedImagesQuery = {
   page: number;
 };
 
+/**
+ * Get paginated list of users uploaded cat images
+ * @param queryParams
+ */
 export const getUploadedImages = (queryParams: GetUploadedImagesQuery) =>
-  catAPIFetch<Image[]>({ path: "/images/", queryParams });
+  catAPIPaginatedFetch<Image[]>({ path: "/images/", queryParams });
 
+/**
+ * Upload a cat image to the cat api
+ * @param file File to upload
+ */
 export const uploadImage = (file: File) => {
   const formData = new FormData();
   formData.append("file", file);
